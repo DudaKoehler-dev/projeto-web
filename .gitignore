@@ -1,0 +1,12 @@
+# Ambiente virtual — nunca versionar
+venv/
+
+# Arquivos de cache do Python
+__pycache__/
+*.pyc
+
+# Configurações locais do VS Code
+.vscode/
+
+# Variáveis de ambiente sensíveis (senhas, chaves)
+.env
