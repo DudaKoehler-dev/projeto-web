@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+</head>
+<body>
+    {# 'usuario' será None se o nome da URL não existir no dicionário #}
+{% if usuario %}
+  <h2>{{ usuario.nome }}</h2>
+  {# Acesso a chaves do dicionário usa ponto (.) no Jinja2 — mais limpo que ['chaves'] #}
+{% else %}
+  <div class="alert alert-danger">Usuário não encontrado.</div>
+{% endif %}
+
+
+</body>
+</html>
