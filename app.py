@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request , redirect , url_for
 from datetime import datetime
 
 app = Flask(__name__)
@@ -14,7 +14,7 @@ def sobre():
     return '''
 
 <h1 style='color:red'>Meu nome é: </h1>
-<p>João Paulo <b>Magagnato</b>
+<p> Daniel Martins e <b>Duda Koehler</b>
 <!-- Tudo que eu pensar em html pode vir aqui -->
 
 '''
@@ -115,6 +115,41 @@ def perfil(nome):
     # Passa o usuário (ou None) para o template
     return render_template('perfil.html', usuario=usuario, nome_buscado=nome)
 
+
+@app.route('/formulario', methods=['GET','POST'])
+def formulario():
+             
+
+    if request.method == 'POST':
+         nome = request.form['nome']
+         num1 = int(request.form['numero1'])
+         num2 = float(request.form['numero2'])
+
+
+         soma = num1 + num2
+         sub = num1 - num2
+         mult = num1 * num2
+         div = num1 / num2
+
+                #REDIRECIONANDO PARA OUTRA ROTA
+                #URL_FOR CHAMA OUTRA ROTA
+         return redirect(url_for('exibir_resultado', nome=nome, soma=soma, sub=sub, mult=mult, div=div))
+
+    return render_template('formulario.html')
+
+@app.route('/exibir_resultado')
+def exibir_resultado():
+     nome = request.args.get('nome')
+     soma = request.args.get('soma')
+     sub = request.args.get('sub')
+     mult = request.args.get('mult')
+     div = request.args.get('div')
+
+     return render_template('/exibir.html', nome=nome, soma=soma, sub=sub, mult=mult, div=div)
+
 # --- ULTIMA COISA DO ARQUIVO ---
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+    
